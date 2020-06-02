@@ -1,3 +1,4 @@
+require('dotenv').config();
 const on = require("./server");
 const axios = require("axios");
 const onServer = require("./server");
@@ -12,7 +13,7 @@ const api = (origem, destino) => {
         origem +
         "&destinations=" +
         destino +
-        "&key=AIzaSyDrUm597y3MHxZ6lpLzE_DZP8fSl_Vdgd0"
+        `&key=${process.env.API_GOOGLE}`
     )
     .then(response => {
       //consulta api do google para controle de tempo
@@ -20,7 +21,7 @@ const api = (origem, destino) => {
         .get(
           "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric,driving&origins=-31.7802207,-52.3257864|-31.781066,-52.335146|-31.779783,-52.339528|-31.775980,-52.339338|-31.772324,-52.342917|-31.772036,-52.340056|-31.77598,-52.339338&destinations=" +
             origem +
-            "&key=APIKEY"
+            `&key=${process.env.API_GOOGLE}`
         )
         .then(responseTimer => {
           // pega dados do response do axios em uma matriz
